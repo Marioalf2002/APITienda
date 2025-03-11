@@ -119,20 +119,6 @@ curl -X PUT http://localhost:8000/api/products/1 \
 curl -X DELETE http://localhost:8000/api/products/1
 ```
 
-#### Ejemplo de creación de producto:
-
-```bash
-curl -X POST http://localhost:8000/api/products \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Producto de Prueba",
-    "description": "Descripción del nuevo producto",
-    "price": 1500,
-    "stock": 100,
-    "active": true
-  }'
-```
-
 ### Órdenes
 
 -   `POST /api/buy`: Crear una nueva orden
@@ -199,27 +185,6 @@ curl -X PUT http://localhost:8000/api/buy/1/payment \
 
 ```bash
 curl -X GET http://localhost:8000/api/user/1/orders | json_pp
-```
-
-#### Ejemplo de creación de orden:
-
-```bash
-curl -X POST http://localhost:8000/api/buy \
-  -H "Content-Type: application/json" \
-  -d '{
-    "user_id": 1,
-    "products": [
-      {
-        "id": 1,
-        "amount": 3
-      },
-      {
-        "id": 2,
-        "amount": 1
-      }
-    ],
-    "payment": 1
-  }'
 ```
 
 #### Ejemplo de respuesta al obtener una orden:
