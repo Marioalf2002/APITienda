@@ -75,6 +75,50 @@ El proyecto sigue una arquitectura en capas:
 -   `PUT /api/products/{id}`: Actualizar un producto existente
 -   `DELETE /api/products/{id}`: Eliminar un producto
 
+1. Obtener todos los productos
+
+```bash
+curl -X GET http://localhost:8000/api/products | json_pp
+```
+
+2. Obtener un producto específico (reemplaza {id} con un ID válido, por ejemplo 1)
+
+```bash
+curl -X GET http://localhost:8000/api/products/1 | json_pp
+```
+
+3. Crear un nuevo producto
+
+```bash
+curl -X POST http://localhost:8000/api/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Nuevo Producto de Prueba",
+    "description": "Este es un producto creado mediante curl",
+    "price": 1250.50,
+    "stock": 25,
+    "active": true
+  }' | json_pp
+```
+
+4. Actualizar un producto existente (reemplaza {id} con un ID válido)
+
+```bash
+curl -X PUT http://localhost:8000/api/products/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Producto Actualizado",
+    "price": 1800.75,
+    "stock": 30
+  }' | json_pp
+```
+
+5. Eliminar un producto (reemplaza {id} con un ID válido)
+
+```bash
+curl -X DELETE http://localhost:8000/api/products/1
+```
+
 #### Ejemplo de creación de producto:
 
 ```bash
@@ -97,6 +141,65 @@ curl -X POST http://localhost:8000/api/products \
 -   `PUT /api/buy/{id}/state`: Actualizar el estado de una orden
 -   `PUT /api/buy/{id}/payment`: Actualizar el método de pago de una orden
 -   `GET /api/user/{userId}/orders`: Obtener las órdenes de un usuario
+
+1. Crear una nueva orden
+
+```bash
+curl -X POST http://localhost:8000/api/buy \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "products": [
+      {
+        "id": 1,
+        "amount": 2
+      },
+      {
+        "id": 2,
+        "amount": 1
+      }
+    ],
+    "payment": 1
+  }' | json_pp
+```
+
+2. Obtener el detalle de una orden (reemplaza {id} con un ID válido)
+
+```bash
+curl -X GET http://localhost:8000/api/buy/1 | json_pp
+```
+
+3. Obtener todas las órdenes
+
+```bash
+curl -X GET http://localhost:8000/api/buy | json_pp
+```
+
+4. Actualizar el estado de una orden (reemplaza {id} con un ID válido)
+
+```bash
+curl -X PUT http://localhost:8000/api/buy/1/state \
+  -H "Content-Type: application/json" \
+  -d '{
+    "state_id": 2
+  }' | json_pp
+```
+
+5. Actualizar el método de pago de una orden (reemplaza {id} con un ID válido)
+
+```bash
+curl -X PUT http://localhost:8000/api/buy/1/payment \
+  -H "Content-Type: application/json" \
+  -d '{
+    "payment_id": 2
+  }' | json_pp
+```
+
+6. Obtener las órdenes de un usuario (reemplaza {userId} con un ID válido)
+
+```bash
+curl -X GET http://localhost:8000/api/user/1/orders | json_pp
+```
 
 #### Ejemplo de creación de orden:
 
